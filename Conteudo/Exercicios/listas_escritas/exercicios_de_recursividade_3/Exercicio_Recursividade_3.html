@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exercício de Recursividade 3</title>
+<style>
+  :root{--fg:#1e1e1e;--bg:#ffffff;--muted:#555;--code:#0b5394}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+  main{max-width:900px;margin:32px auto;padding:0 16px}
+  h1,h2,h3{line-height:1.2}
+  h1{font-size:1.8rem;margin:0 0 8px}
+  h2{font-size:1.3rem;margin:24px 0 8px}
+  p{margin:8px 0}
+  .note{color:var(--muted)}
+  code{background:#f5f5f5;padding:0 4px;border-radius:4px;color:var(--code)}
+  pre{background:#f5f5f5;padding:12px;border-radius:6px;overflow:auto}
+  table{border-collapse:collapse;width:100%;margin:12px 0}
+  th,td{border:1px solid #ddd;padding:6px;text-align:left}
+  .hr{height:1px;background:#eee;margin:24px 0}
+  @media print { a[href]::after{content:" (" attr(href) ")";color:#888;font-size:90%} }
+</style>
+</head>
+<body>
+<main>
+  <h1>Exercício de Recursividade 3</h1>
+
+  <div class="hr"></div>
+  <h2>1) Pré-ordem (n = 4)</h2>
+  <pre><code>func(int n){
+  if (n == 0) printf("fim");
+  else { printf(n); func(n-1); }
+}</code></pre>
+  <p><strong>Saída:</strong> 4 3 2 1 fim</p>
+  <pre><code>func(4)
+  print 4
+  func(3)
+    print 3
+    func(2)
+      print 2
+      func(1)
+        print 1
+        func(0)
+          print fim</code></pre>
+
+  <div class="hr"></div>
+  <h2>2) Pós-ordem (n = 4)</h2>
+  <pre><code>func(int n){
+  if (n == 0) printf("fim");
+  else { func(n-1); printf(n); }
+}</code></pre>
+  <p><strong>Saída:</strong> fim 1 2 3 4</p>
+  <pre><code>func(4)
+  func(3)
+    func(2)
+      func(1)
+        func(0)
+          print fim
+        print 1
+      print 2
+    print 3
+  print 4</code></pre>
+
+  <div class="hr"></div>
+  <h2>3) Pré e pós (n = 4)</h2>
+  <pre><code>func(int n){
+  if (n == 0) printf("fim");
+  else {
+    printf(n);
+    func(n-1);
+    printf(n);
+  }
+}</code></pre>
+  <p><strong>Saída:</strong> 4 3 2 1 fim 1 2 3 4</p>
+  <pre><code>... func(0) -&gt; fim
+na subida: 1, 2, 3, 4</code></pre>
+
+  <div class="hr"></div>
+  <h2>4) Infixa com duas chamadas (n = 3)</h2>
+  <pre><code>func(int n){
+  if (n == 0) printf("fim");
+  else {
+    func(n-1);
+    printf(n);
+    func(n-1);
+  }
+}</code></pre>
+  <p><strong>Saída:</strong> fim 1 fim 2 fim 1 fim 3 fim 1 fim 2 fim 1 fim</p>
+  <pre><code>func(3)
+  func(2) -&gt; fim 1 fim 2 fim 1 fim
+  print 3
+  func(2) -&gt; fim 1 fim 2 fim 1 fim</code></pre>
+
+  <div class="hr"></div>
+  <h2>5) Pré-ordem com duas chamadas (n = 3)</h2>
+  <pre><code>func(int n){
+  if (n == 0) printf("fim");
+  else {
+    printf(n);
+    func(n-1);
+    func(n-1);
+  }
+}</code></pre>
+  <p><strong>Saída:</strong> 3 2 1 fim fim 1 fim fim 2 1 fim fim 1 fim fim</p>
+
+  <div class="hr"></div>
+  <h2>6) Pós-ordem com duas chamadas (n = 3)</h2>
+  <pre><code>func(int n){
+  if (n == 0) printf("fim");
+  else {
+    func(n-1);
+    func(n-1);
+    printf(n);
+  }
+}</code></pre>
+  <p><strong>Saída:</strong> fim fim 1 fim fim 1 2 fim fim 1 fim fim 1 2 3</p>
+
+  <div class="hr"></div>
+  <h2>7) Euclides (fazAlgo)</h2>
+  <pre><code>int fazAlgo(int x, int y){
+  if (y == 0) return x;
+  else return fazAlgo(y, x % y);
+}</code></pre>
+  <p><strong>Entradas e resultados:</strong></p>
+  <ul>
+    <li>12 e 18 → 6 (trajeto: (12,18) → (18,12) → (12,6) → (6,0))</li>
+    <li>6 e 9 → 3 (trajeto: (6,9) → (9,6) → (6,3) → (3,0))</li>
+  </ul>
+  <p><strong>O que calcula?</strong> O MDC (máximo divisor comum) pelo algoritmo de Euclides.</p>
+
+  <div class="hr"></div>
+  <p class="note">Dica: para exportar em PDF, abra este arquivo no navegador e use Imprimir &gt; Salvar como PDF.</p>
+</main>
+</body>
+</html>

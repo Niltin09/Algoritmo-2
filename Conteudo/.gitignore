@@ -1,0 +1,11 @@
+# binarios e artefatos
+*.exe
+*.out
+
+# pastas de build/execucao
+**/output/
+**/build/
+
+# temporarios
+*.tmp
+.~lock.*
